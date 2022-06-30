@@ -60,15 +60,14 @@ a {
   margin-left: 1rem;
 }
 
-.imghover {
+.imgHover {
   width: 100%;
   height: 100%;
   box-shadow: 0 3px 12px -1px rgb(7 10 25 / 20%), 0 22px 27px -20px rgb(7 10 25 / 20%);
   transition: all .3s ease;
-  margin-bottom: 10px;
 }
 
-.imgHover {
+.imgHover:hover {
   opacity: 1;
   box-shadow: 0 15px 45px -5px rgb(7 10 25 / 25%);
   -webkit-filter: brightness(1.07);
@@ -109,6 +108,20 @@ a {
   padding: 0 3px;
 }
 
+.readMore {
+  color: black;
+  position: relative;
+  display: inline-block;
+  box-sizing: content-box;
+}
+
+.readMore::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: #000;
+}
 
 .featSection {
   display: grid;
@@ -139,6 +152,14 @@ a {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 20px;
+  align-items: baseline;
+}
+
+.withSidebar .rightCol {
+  position: -webkit-sticky;
+  position: sticky;
+  grid-gap: 0px;
+  top: 0;
 }
 
 .postList {
@@ -222,6 +243,9 @@ footer {
     transition: all 0.5s ease;
     z-index: 1;
   }
+  .sidebar {
+    display: none;
+  }
 }
 
 @media (max-width: 769px) {
@@ -253,6 +277,8 @@ footer {
     grid-template-columns: repeat(1, auto);
 
   }
+
+  .withSidebar {
+    grid-template-columns: repeat(1, auto);
+  }
 }
-
-

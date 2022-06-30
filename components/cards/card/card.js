@@ -4,7 +4,7 @@ export default function Card() {
   return (
     <div className={styles.Card}>
       <div className="featImg">
-        <img className="imghover"
+        <img className="imgHover"
           src="https://cdn.gamerjournalist.com/primary/2022/06/UyN5XtM3L2L23vD38GKX7f-1.jpg"
           alt="card title"
         />

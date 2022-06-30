@@ -25,7 +25,7 @@ export default function Sidebar() {
   const isSticky = (e) => {
     const sidebarEl = document.querySelector(".sidebar");
     const scrollTop = window.scrollY;
-    if (scrollTop >= sidebarTop - 10) {
+    if (scrollTop >= sidebarTop - 30) {
       sidebarEl.classList.add("is-sticky");
     } else {
       sidebarEl.classList.remove("is-sticky");
@@ -34,10 +34,9 @@ export default function Sidebar() {
 
   return (
     <div className="sidebar">
-      <div className="blockTitle">Most Commented</div>
+      <div className="blockHeader">Most Commented</div>
       <Card/>
       <Card/>
-
       <Card/>
       <Card/>
       <Card/>

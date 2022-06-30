@@ -5,7 +5,7 @@ export default function ImgCard() {
     return (
         <div className={styles.ImgCard}>
             <div className='featImg'>
-                <img className="imghover" src="https://cdn.gamerjournalist.com/primary/2022/06/UyN5XtM3L2L23vD38GKX7f-1.jpg" alt="card title" />
+                <img className="imgHover" src="https://cdn.gamerjournalist.com/primary/2022/06/UyN5XtM3L2L23vD38GKX7f-1.jpg" alt="card title" />
             </div>
             <div>
                 <span className='meta tag'>Gaming</span>

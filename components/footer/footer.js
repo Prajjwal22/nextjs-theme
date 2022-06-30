@@ -6,6 +6,7 @@ import {
   faTwitch,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../footer/footer.module.css";
 
@@ -20,21 +21,25 @@ export default function Footer() {
             </a>
           </li>
           <li>
-          <a href="#">
+            <a href="#">
               <FontAwesomeIcon color="white" size="lg" icon={faTwitter} />
-            </a>          </li>
+            </a>{" "}
+          </li>
           <li>
-          <a href="#">
+            <a href="#">
               <FontAwesomeIcon color="white" size="lg" icon={faInstagram} />
-            </a>          </li>
+            </a>{" "}
+          </li>
           <li>
-          <a href="#">
+            <a href="#">
               <FontAwesomeIcon color="white" size="lg" icon={faTwitch} />
-            </a>          </li>
+            </a>{" "}
+          </li>
           <li>
-          <a href="#">
+            <a href="#">
               <FontAwesomeIcon color="white" size="lg" icon={faGoogle} />
-            </a>          </li>
+            </a>{" "}
+          </li>
         </ul>
         <ul className={styles.footerMenu}>
           <li>Home</li>
@@ -47,6 +52,21 @@ export default function Footer() {
           © {new Date().getFullYear()}{" "}
           <strong>Contentberg ReactJS Theme.</strong> All Rights Reserved.
         </p>
+        <div className={styles.goTop}>
+          <a
+            href="#"
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+                /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+              });
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowAltCircleUp} /> Top
+          </a>
+        </div>
       </div>
     </footer>
   );
