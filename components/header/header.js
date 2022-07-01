@@ -5,29 +5,44 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import styles from "../header/header.module.css";
 
 export default function Header() {
   const [click, setClick] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const Close = () => setClick(false);
+  const handleClick = () => {
+    setClick(!click);
+    if (!click) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  };
+  // const Close = () => {setClick(false);
+  //   document.body.style.overflow='none';
+  // }
 
   return (
     <>
       <div style={{ display: "unset" }}>
         <div
           className={click ? "main-container" : ""}
-          onClick={() => Close()}
+          onClick={() => {
+            setClick(!click);
+            document.body.style.overflow = "none";
+          }}
         />
         <nav className={styles.Navbar} onClick={(e) => e.stopPropagation()}>
           <div className={styles.navContainer}>
             <div className={styles.navLogo}>
-              <img
-                src="https://contentberg.theme-sphere.com/wp-content/uploads/2018/09/logo-1x-1.png"
-                alt="Site"
-              />
+              <Link href="/">
+                <img
+                  src="https://contentberg.theme-sphere.com/wp-content/uploads/2018/09/logo-1x-1.png"
+                  alt="Site"
+                />
+              </Link>
             </div>
             <ul className={click ? "navMenu active" : "navMenu"}>
               <li className={styles.navItem}>
@@ -38,18 +53,22 @@ export default function Header() {
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >
-                  Home
+                  <Link href="/">
+                    <a>Home</a>
+                  </Link>
                 </div>
               </li>
               <li className={styles.navItem}>
                 <div
                   exact
-                  to="/about"
+                  to="/posts/posts"
                   activeClassName="active"
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >
-                  About
+                  <Link href="/posts/posts">
+                    <a>Posts</a>
+                  </Link>
                 </div>
               </li>
               <li className={styles.navItem}>

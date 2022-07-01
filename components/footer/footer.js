@@ -54,15 +54,8 @@ export default function Footer() {
         </p>
         <div className={styles.goTop}>
           <a
-            href="#"
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-                /* you can also use 'auto' behaviour
-         in place of 'smooth' */
-              });
-            }}
+            href="#" 
+
           >
             <FontAwesomeIcon icon={faArrowAltCircleUp} /> Top
           </a>
