@@ -2,12 +2,14 @@ import {
   faBars,
   faCancel,
   faCross,
+  faSearch,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "../header/header.module.css";
+import Search from "../search/search";
 
 export default function Header() {
   const [click, setClick] = useState(false);
@@ -101,6 +103,7 @@ export default function Header() {
                 <FontAwesomeIcon icon={faBars} width={40} />
               )}
             </div>
+            <Search/>
           </div>
         </nav>
       </div>
