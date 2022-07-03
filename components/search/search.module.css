@@ -1,4 +1,11 @@
-.Search {}
+.Search::before {
+    display: inline-block;
+    content: "";
+    padding-right: 22px;
+    height: 16px;
+    border-left: 1px solid #ddd;
+    vertical-align: middle;
+}
 
 .searchOverlay {
     color: rgb(0, 0, 0);
