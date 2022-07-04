@@ -18,7 +18,7 @@ h6 {
 }
 
 .lock-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 a {
@@ -95,7 +95,6 @@ a {
   font-size: 12px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  margin: 20px 0;
   font-weight: 700;
 }
 
@@ -222,6 +221,120 @@ footer {
   animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
 }
 
+.singleCover .featured {
+  position: relative;
+  margin-top: -10px;
+  margin-bottom: 55px;
+}
+
+.singleCover .featured:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(128, 128, 128, 0) 50%, rgba(0, 0, 0, .35) 100%);
+  pointer-events: none;
+}
+
+.singleCover .featured img {
+  display: block;
+}
+
+.featuredOverlay {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 15px 40px;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.singleCover .largeTitle {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  color: inherit;
+  font-size: 34px;
+  max-width: 720px;
+}
+
+.singleCover .tag {
+  display: inline-block;
+  padding: 0 7px;
+  margin-right: 5px;
+  background: #2d53fe;
+  color: #fff;
+  line-height: 18px;
+  letter-spacing: .11em;
+}
+
+.singleCover .meta {
+  color: #fff;
+}
+
+.singleCover .metaSeperator::before {
+  padding: 0 10px;
+}
+
+
+
+.postShare {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin-top: -15px;
+  padding: 0;
+  float: right
+}
+
+.postShare li {
+  height: 50px;
+  width: 35px;
+  position: relative;
+}
+
+.postShare a {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.mainArea {
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+}
+
+.socialShare .postShare {
+  flex-direction: column;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  font-size: 14px;
+}
+
+.socialShare .postShare li {
+  background: #fff;
+  margin-top: 8px;
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  position: relative;
+  box-shadow: 0px 5px 10px rgb(0 0 0 / 10%);
+}
+
+.socialShare .postShare a {
+    position: absolute;
+    top: 9px;
+    left: 12px;
+}
+
+.socialShare p {
+  font-size: 10px;
+}
+
 
 @media screen and (max-width: 960px) {
 
@@ -247,9 +360,22 @@ footer {
     transition: all 0.5s ease;
     z-index: 1;
   }
+
   .sidebar {
     display: none;
   }
+}
+
+.message {
+  font-size: 18px;
+  color: #a0a0a0;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
 }
 
 @media (max-width: 769px) {
@@ -285,11 +411,40 @@ footer {
   .withSidebar {
     grid-template-columns: repeat(1, auto);
   }
-}
+
+  .singleCover .featured img {
+    width: 100%;
+    min-height: 250px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    font-family: 'object-fit: cover';
+  }
+
+  .singleCover .largeTitle {
+    font-size: 21px;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .singleCover .tag {
+    margin: 0 0 10px 0 !important;
+  }
+
+  .singleCover .meta {
+    margin: 0;
+  }
+
+  .singleCover {
+    padding: 0px 0px !important;
+  }
+
+  .featuredOverlay {
+    padding: 30px;
+    padding-bottom: 20px;
+  }
+
+  .featuredOverlay .postShare {
+    display: none;
+  }
 
 
-main{
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 30px;
 }

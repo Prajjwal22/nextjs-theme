@@ -1,13 +1,10 @@
 import {
   faBars,
-  faCancel,
-  faCross,
-  faSearch,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import styles from "../header/header.module.css";
 import Search from "../search/search";
 
@@ -32,12 +29,19 @@ export default function Header() {
         <div
           className={click ? "main-container" : ""}
           onClick={() => {
-            setClick(!click);
-            document.body.style.overflow = "none";
+            // setClick(!click);
+            // document.body.style.overflow = "none";
           }}
         />
         <nav className={styles.Navbar} onClick={(e) => e.stopPropagation()}>
           <div className={styles.navContainer}>
+            <div className={styles.navIcon} onClick={handleClick}>
+              {click ? (
+                <FontAwesomeIcon icon={faTimes} width={40} />
+              ) : (
+                <FontAwesomeIcon icon={faBars} width={40} />
+              )}
+            </div>
             <div className={styles.navLogo}>
               <Link href="/">
                 <img
@@ -96,14 +100,9 @@ export default function Header() {
                 </div>
               </li>
             </ul>
-            <div className={styles.navIcon} onClick={handleClick}>
-              {click ? (
-                <FontAwesomeIcon icon={faTimes} width={40} />
-              ) : (
-                <FontAwesomeIcon icon={faBars} width={40} />
-              )}
+            <div className={styles.search}>
+              <Search />
             </div>
-            <Search/>
           </div>
         </nav>
       </div>

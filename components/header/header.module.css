@@ -20,12 +20,12 @@
     width: 1150px;
     height: 80px;
     max-width: 1500px;
+    padding: 10px;
   }
   
   
   .navLogo {
     align-items: center;
-    margin-left: 20px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
@@ -93,12 +93,30 @@
       display: block;
       position: absolute;
       top: -5px;
-      right: 0;
+      left: 50px;
       transform: translate(-100%, 60%);
       font-size: 1.8rem;
       cursor: pointer;
       color: #000;
     }
+
+    .navContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      max-width: 1500px;
+    }
+
+    .navLogo {
+      flex-grow: unset;
+    }
+
+    .search {
+      position: absolute;
+      right: 20px;
+    }
+    
   }
   
   
