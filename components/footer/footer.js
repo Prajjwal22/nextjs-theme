@@ -53,12 +53,9 @@ export default function Footer() {
           <strong>Contentberg ReactJS Theme.</strong> All Rights Reserved.
         </p>
         <div className={styles.goTop}>
-          <a
-            href="#" 
-
-          >
-            <FontAwesomeIcon icon={faArrowAltCircleUp} /> Top
-          </a>
+            <FontAwesomeIcon icon={faArrowAltCircleUp} onClick={() => {
+          window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        }} /> Top
         </div>
       </div>
     </footer>

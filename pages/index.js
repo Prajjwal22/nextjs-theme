@@ -86,13 +86,12 @@ export default function Home() {
           <LoadBtn />
         </div>
         <div className="homeSection">
-
           <div className="withSidebar">
             <div className="leftCol">
-            <div className="sectionTitle">
-            <h2>What&apos;s New?</h2>
-            <span className="meta">View all</span>
-          </div>
+              <div className="sectionTitle">
+                <h2>What&apos;s New?</h2>
+                <span className="meta">View all</span>
+              </div>
               <ImgCard />
               <ImgCard />
               <ImgCard />
@@ -103,7 +102,7 @@ export default function Home() {
               <ImgCard />
             </div>
             <div className="rightCol">
-              <Sidebar/>
+              <Sidebar />
             </div>
           </div>
         </div>

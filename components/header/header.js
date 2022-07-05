@@ -80,12 +80,14 @@ export default function Header() {
               <li className={styles.navItem}>
                 <div
                   exact
-                  to="/blog"
+                  to="/posts/category"
                   activeClassName="active"
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >
-                  Blog
+                  <Link href="/posts/category">
+                    <a>Category</a>
+                  </Link>
                 </div>
               </li>
               <li className={styles.navItem}>
