@@ -6,8 +6,15 @@ import Footer from "../components/footer/footer";
 import Header from "../components/header/header";
 import Card from "../components/cards/card/card";
 import Sidebar from "../components/sidebar/sidebar";
+import Post from "../components/posts";
+import { getPosts } from "../utils/wordpress";
 
-export default function Home() {
+export default function Home({posts}) {
+  const featuredImage = posts[0]._embedded['wp:featuredmedia'][0].source_url
+  const jsxPosts = posts.map((post) => {
+    return <Post post={post} key={post.id} />;
+  });
+  console.log(posts[0] )
   return (
     <>
       <Head>
@@ -19,10 +26,11 @@ export default function Home() {
       <div className="container">
         <div className="homeSection">
           <div className="featSection">
-            <ImgCard />
+            <ImgCard image = {featuredImage} title = {posts[0].title.rendered} category={posts[0]._embedded['wp:term'][0][0].name} excerpt={posts[0].excerpt.rendered} />
             <div>
               <h3 className="blockHeader">More Featured</h3>
               <div className="postList">
+            {jsxPosts}
                 <TextCard />
                 <TextCard />
                 <TextCard />
@@ -110,4 +118,13 @@ export default function Home() {
       <Footer />
     </>
   );
+}
+export async function getStaticProps({ params }) {
+  const posts = await getPosts();
+
+  return {
+    props: {
+      posts    },
+    revalidate: 10, // In seconds
+  };
 }

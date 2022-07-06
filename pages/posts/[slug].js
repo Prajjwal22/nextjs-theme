@@ -10,26 +10,49 @@ import Card from "../../components/cards/card/card";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/sidebar";
+import Link from "next/link";
+import Image from 'next/image';
 
-export default function Posts() {
+import { getPost, getSlugs } from "../../utils/wordpress";
+import { getDate } from "../../utils/utils";
+import { useEffect, useState } from "react";
+
+
+export default function PostPage({ post }) {
+    const featuredImage = post._embedded['wp:featuredmedia'][0].source_url
+    const obj=Object.keys(post._embedded['authors'][0].avatar_urls)
+    const objValue = Object.values(post._embedded['authors'][0].avatar_urls)
+    console.log(post._embedded['authors'][0]?.description)
+
+
+    useEffect(() => {
+        const allText = document.getElementsByClassName("postContent")[0].innerText;
+        const wpm = 150;
+        const words = allText.trim().split(/\s+/).length;
+        const time = Math.ceil(words / wpm);
+        document.getElementById("time").innerText = time;
+        console.log("time" + time)
+    }, []);
+
   return (
     <>
       <Header />
       <div className="singleCover container">
         <div className="featured">
-          <img
-            src="https://contentberg.theme-sphere.com/wp-content/uploads/2018/09/shutterstock_1035324535-1170x508.jpg"
+        <img
+            src={featuredImage}
             className="imgHover"
+            alt={post.title.rendered}
           />
           <div className="featuredOverlay">
-            <span className="meta tag">Gaming</span>
-            <h1 className="largeTitle">Best Games to Play in 2022 (Xbox)</h1>
+            <span className="meta tag">{post._embedded['wp:term'][0][0].name}</span>
+            <h1 className="largeTitle">{post.title.rendered}</h1>
             <div className="meta dateMeta">
-              <span className="postAuthor"> By Matthew Gupta</span>
+              <span className="postAuthor">By {post._embedded['authors'][0].name}</span>
               <span className="metaSeperator"></span>
-              <time className="pubDate">Aug 14 2018</time>
+              <time className="pubDate">{getDate(post.modified)}</time>
               <span className="metaSeperator"></span>
-              <span className="readTime">5 Mins Read</span>
+              <span className="readTime"><span id="time"></span> Mins Read</span>
               <ul className="postShare">
                 <li>
                   <a href="#">
@@ -95,94 +118,10 @@ export default function Posts() {
           </div>
           <div className="mainContent">
             <artlce className="articleBody">
-              <div className="postContent">
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in <strong>particular are subject
-                  rigorous</strong> building design and construction standards as much as
-                  possible.{" "}
-                </p>
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-                <h2>How to Install macOS BigSur in M1</h2>
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-                <img src="https://contentberg.theme-sphere.com/wp-content/uploads/2018/09/shutterstock_1033175749.jpg" />
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-
-                <p>
-                  More off this less hello salamander lied porpoise much over
-                  tightly circa horse taped so innocuously outside crud mightily
-                  rigorous plot life. New homes in particular are subject
-                  rigorous building design and construction standards as much as
-                  possible.{" "}
-                </p>
-
-                <h4>The Dreamy Factors</h4>
-
-                <p>
-                  In order to get everyone on the same page, with the right
-                  incentives, we have to accomplish a few things:
-                </p>
-
-                <ul>
-                  <li>
-                    <strong>Return to investors.</strong>&nbsp;Our investors
-                    took a huge bet on us and they deserved to get a handsome
-                    return.
-                  </li>
-                  <li>
-                    <strong>Return to employees.</strong>&nbsp;Our team also
-                    took a big bet on us over the years by investing their time.
-                    They deserved a return as well.
-                  </li>
-                  <li>
-                    <strong>Stock options.</strong>&nbsp;If we weren&rsquo;t
-                    planning to sell the company, giving employees stock options
-                    didn&rsquo;t make sense. We needed a new way for the team to
-                    share in the success of the business.
-                  </li>
-                </ul>
-                <p>&nbsp;</p>
-              </div>
+              <div
+                className="postContent"
+                dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+              ></div>
               <div className="postFooter">
                 <div className="footerMeta">
                   <div className="postTags">
@@ -245,24 +184,22 @@ export default function Posts() {
                   </ul>
                 </div>
                 <div className="authorBox">
-                    <img
-                      alt=""
-                      src="https://contentberg.theme-sphere.com/wp-content/uploads/2018/09/main.jpg" className="profileImage"/>
-                    <span className="author">
-                      <a
-                        href="https://contentberg.theme-sphere.com/blog/author/admin/"
-                        title="Posts by James Doe"
-                        rel="author"
-                      >
-                        James Doe
-                      </a>
-                    </span>
-                    <p className="authorBio">
-                      Orion Pax is constantly, if not always depicted as having
-                      strong moral character, excellent leadership, and sound
-                      decision-making skills, and an advanced extraterrestrial.
-                    </p>
-                    <ul className="postShare">
+                  <img
+                    alt=""
+                    src={objValue[2]}
+                    className="profileImage"
+                  />
+                  <span className="author">
+                    <a
+                      href="https://contentberg.theme-sphere.com/blog/author/admin/"
+                      title="Posts by James Doe"
+                      rel="author"
+                    >
+                      {post._embedded['authors'][0].name}
+                    </a>
+                  </span>
+                  <p className="authorBio">{post._embedded['authors'][0].description}</p>
+                  <ul className="postShare">
                     <li>
                       <a href="#">
                         <FontAwesomeIcon
@@ -303,17 +240,19 @@ export default function Posts() {
                 </div>
               </div>
               <div className="relatedSection">
-                <h4><span>Related Posts</span></h4>
+                <h4>
+                  <span>Related Posts</span>
+                </h4>
                 <div className="relatedPosts">
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-              </div>
+                  <Card />
+                  <Card />
+                  <Card />
+                  <Card />
+                </div>
               </div>
             </artlce>
           </div>
-          <div style={{ position: "sticky", top: 0, height:"fit-content" }}>
+          <div style={{ position: "sticky", top: 0, height: "fit-content" }}>
             <Sidebar />
           </div>
         </div>
@@ -321,4 +260,28 @@ export default function Posts() {
       <Footer />
     </>
   );
+}
+
+//hey Next, these are the possible slugs
+export async function getStaticPaths() {
+  const paths = await getSlugs("posts");
+
+  return {
+    paths,
+    //this option below renders in the server (at request time) pages that were not rendered at build time
+    //e.g when a new blogpost is added to the app
+    fallback: "blocking",
+  };
+}
+
+//access the router, get the id, and get the data for that post
+export async function getStaticProps({ params }) {
+  const post = await getPost(params.slug);
+
+  return {
+    props: {
+      post,
+    },
+    revalidate: 10, // In seconds
+  };
 }

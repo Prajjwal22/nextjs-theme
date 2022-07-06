@@ -239,6 +239,8 @@ footer {
 
 .singleCover .featured img {
   display: block;
+  max-height: 600px;
+  object-fit: cover;
 }
 
 .featuredOverlay {
@@ -360,6 +362,13 @@ footer {
   line-height: 1.79;
 }
 
+.wp-block-image {
+  max-width: 100%;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0
+}
+
 .postContent p {
   margin-bottom: 1.65em;
   line-height: 1.75em;
@@ -372,7 +381,7 @@ footer {
 .mainContent h4,
 .mainContent h5,
 .mainContent h6 {
-  margin-top: calc(13px + 1.2em);
+  /* margin-top: calc(13px + 1.2em); */
   margin-bottom: calc(10px + .2em);
   font-weight: 700;
   letter-spacing: normal;
@@ -597,6 +606,20 @@ footer {
   pointer-events: none;
 }
 
+img[class*='wp-image-'], .aligncenter {
+  width: 100% !important;
+}
+
+.wp-caption {
+  max-width: 100%;
+}
+
+.wp-caption-text {
+  margin-top: 10px;
+  font-size: .8em;
+  font-style: italic;
+}
+
 @media screen and (max-width: 960px) {
 
   .navMenu {
@@ -707,9 +730,15 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none;
   }
 
-  .mainArea {
+  .mainArea,
+  .Category .mainArea {
     grid-template-columns: 1fr;
   }
+
+  .postContent {
+    font-size: 16px;
+  }
+
 
   .socialShare {
     position: unset;
