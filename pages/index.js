@@ -30,11 +30,9 @@ export default function Home({posts}) {
             <div>
               <h3 className="blockHeader">More Featured</h3>
               <div className="postList">
-            {jsxPosts}
-                <TextCard />
-                <TextCard />
-                <TextCard />
-                <TextCard />
+            {posts.slice(1,5).map((post) => {
+    return <TextCard post={post} key={post.id} />;
+  })}
               </div>
             </div>
           </div>

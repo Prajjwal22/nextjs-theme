@@ -20,9 +20,9 @@ import { useEffect, useState } from "react";
 
 export default function PostPage({ post }) {
     const featuredImage = post._embedded['wp:featuredmedia'][0].source_url
-    const obj=Object.keys(post._embedded['authors'][0].avatar_urls)
-    const objValue = Object.values(post._embedded['authors'][0].avatar_urls)
-    console.log(post._embedded['authors'][0]?.description)
+    const obj= undefined || Object?.keys(post._embedded['authors'][0]?.avatar_urls)
+    const objValue = Object?.values(post?._embedded['authors'][0]?.avatar_urls)
+    // console.log(post._embedded['authors'][0]?.description)
 
 
     useEffect(() => {
@@ -125,24 +125,11 @@ export default function PostPage({ post }) {
               <div className="postFooter">
                 <div className="footerMeta">
                   <div className="postTags">
-                    <a
-                      href="https://contentberg.theme-sphere.com/blog/tag/beauty/"
-                      rel="tag"
-                    >
-                      Beauty
+                    <Link href={'#'}>
+                    <a>
+                    {post._embedded['wp:term'][1][0].name}
                     </a>
-                    <a
-                      href="https://contentberg.theme-sphere.com/blog/tag/beauty/"
-                      rel="tag"
-                    >
-                      Marketing
-                    </a>
-                    <a
-                      href="https://contentberg.theme-sphere.com/blog/tag/beauty/"
-                      rel="tag"
-                    >
-                      Gadgets
-                    </a>
+                    </Link>
                   </div>
                   <ul className="postShare">
                     <li>
