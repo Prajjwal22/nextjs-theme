@@ -11,48 +11,64 @@ import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/sidebar";
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 
-import { getPost, getSlugs } from "../../utils/wordpress";
+import { getPost, getPosts, getSlugs } from "../../utils/wordpress";
 import { getDate } from "../../utils/utils";
 import { useEffect, useState } from "react";
 
 
-export default function PostPage({ post }) {
-    const featuredImage = post._embedded['wp:featuredmedia'][0].source_url
-    const obj= undefined || Object?.keys(post._embedded['authors'][0]?.avatar_urls)
-    const objValue = Object?.values(post?._embedded['authors'][0]?.avatar_urls)
-    // console.log(post._embedded['authors'][0]?.description)
+export default function PostPage({post, posts}) {
+  const featuredImage = post._embedded["wp:featuredmedia"][0].source_url;
+  const obj = Object?.keys(post._embedded["author"][0]?.avatar_urls);
+  const objValue = Object?.values(post?._embedded["author"][0]?.avatar_urls);
 
+  const tagsObj = Object.keys(post._embedded["wp:term"][1]).map(
+    (res) => res.name
+  );
+  const tagsObject = Object.values(post._embedded["wp:term"][1]).map(
+    (res) => res.name
+  );
 
-    useEffect(() => {
-        const allText = document.getElementsByClassName("postContent")[0].innerText;
-        const wpm = 150;
-        const words = allText.trim().split(/\s+/).length;
-        const time = Math.ceil(words / wpm);
-        document.getElementById("time").innerText = time;
-        console.log("time" + time)
-    }, []);
+  // console.log(post);
+
+  useEffect(() => {
+    const allText = document.getElementsByClassName("postContent")[0].innerText;
+    const wpm = 150;
+    const words = allText.trim().split(/\s+/).length;
+    const time = Math.ceil(words / wpm);
+    document.getElementById("time").innerText = time;
+    // console.log("time" + time);
+  }, []);
 
   return (
     <>
       <Header />
       <div className="singleCover container">
         <div className="featured">
-        <img
+          <img
             src={featuredImage}
             className="imgHover"
             alt={post.title.rendered}
           />
           <div className="featuredOverlay">
-            <span className="meta tag">{post._embedded['wp:term'][0][0].name}</span>
-            <h1 className="largeTitle">{post.title.rendered}</h1>
+            <span className="meta tag">
+              {post._embedded["wp:term"][0][0].name}
+            </span>
+            <h1
+              className="largeTitle"
+              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+            ></h1>
             <div className="meta dateMeta">
-              <span className="postAuthor">By {post._embedded['authors'][0].name}</span>
+              <span className="postAuthor">
+                By {post._embedded["authors"][0].name}
+              </span>
               <span className="metaSeperator"></span>
               <time className="pubDate">{getDate(post.modified)}</time>
               <span className="metaSeperator"></span>
-              <span className="readTime"><span id="time"></span> Mins Read</span>
+              <span className="readTime">
+                <span id="time"></span> Mins Read
+              </span>
               <ul className="postShare">
                 <li>
                   <a href="#">
@@ -125,11 +141,13 @@ export default function PostPage({ post }) {
               <div className="postFooter">
                 <div className="footerMeta">
                   <div className="postTags">
-                    <Link href={'#'}>
-                    <a>
-                    {post._embedded['wp:term'][1][0].name}
-                    </a>
-                    </Link>
+                    {tagsObject.slice(1, 5).map((tagsObject) => {
+                      return (
+                        <Link href={`/posts/${post.slug}`} key={post.id}>
+                          <a>{tagsObject} </a>
+                        </Link>
+                      );
+                    })}
                   </div>
                   <ul className="postShare">
                     <li>
@@ -171,21 +189,19 @@ export default function PostPage({ post }) {
                   </ul>
                 </div>
                 <div className="authorBox">
-                  <img
-                    alt=""
-                    src={objValue[2]}
-                    className="profileImage"
-                  />
+                  <img alt="" src={objValue[2]} className="profileImage" />
                   <span className="author">
                     <a
                       href="https://contentberg.theme-sphere.com/blog/author/admin/"
                       title="Posts by James Doe"
                       rel="author"
                     >
-                      {post._embedded['authors'][0].name}
+                      {post._embedded["authors"][0].name}
                     </a>
                   </span>
-                  <p className="authorBio">{post._embedded['authors'][0].description}</p>
+                  <p className="authorBio">
+                    {post._embedded["authors"][0].description}
+                  </p>
                   <ul className="postShare">
                     <li>
                       <a href="#">
@@ -231,16 +247,15 @@ export default function PostPage({ post }) {
                   <span>Related Posts</span>
                 </h4>
                 <div className="relatedPosts">
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
+                {posts.slice(0,4).map((post) => {
+    return <Card post={post} key={post.id} />;
+  })}
                 </div>
               </div>
             </artlce>
           </div>
           <div style={{ position: "sticky", top: 0, height: "fit-content" }}>
-            <Sidebar />
+            {/* <Sidebar /> */}
           </div>
         </div>
       </div>
@@ -264,10 +279,12 @@ export async function getStaticPaths() {
 //access the router, get the id, and get the data for that post
 export async function getStaticProps({ params }) {
   const post = await getPost(params.slug);
+  const posts = await getPosts();
 
   return {
     props: {
       post,
+      posts,
     },
     revalidate: 10, // In seconds
   };

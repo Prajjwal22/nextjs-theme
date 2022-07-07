@@ -35,14 +35,14 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="blockHeader">Most Commented</div>
+      {/* <Card />
       <Card/>
       <Card/>
       <Card/>
       <Card/>
       <Card/>
       <Card/>
-      <Card/>
-      <Card/>
+      <Card/> */}
 
     </div>
   );

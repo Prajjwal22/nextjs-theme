@@ -14,7 +14,7 @@ export default function Home({posts}) {
   const jsxPosts = posts.map((post) => {
     return <Post post={post} key={post.id} />;
   });
-  console.log(posts[0] )
+  // console.log(posts[0] )
   return (
     <>
       <Head>
@@ -26,7 +26,7 @@ export default function Home({posts}) {
       <div className="container">
         <div className="homeSection">
           <div className="featSection">
-            <ImgCard image = {featuredImage} title = {posts[0].title.rendered} category={posts[0]._embedded['wp:term'][0][0].name} excerpt={posts[0].excerpt.rendered} />
+            <ImgCard posts={posts[0]}/>
             <div>
               <h3 className="blockHeader">More Featured</h3>
               <div className="postList">
@@ -43,8 +43,8 @@ export default function Home({posts}) {
             <span className="meta">View all</span>
           </div>
           <div className="twoCol">
-            <ImgCard />
-            <ImgCard />
+          <ImgCard posts={posts[1]}/>
+          <ImgCard posts={posts[2]}/>
           </div>
           <LoadBtn />
         </div>
@@ -54,12 +54,9 @@ export default function Home({posts}) {
             <span className="meta">View all</span>
           </div>
           <div className="threeCol">
-            <ImgCard />
-            <ImgCard />
-            <ImgCard />
-            <ImgCard />
-            <ImgCard />
-            <ImgCard />
+          {posts.slice(2,8).map((post) => {
+    return <ImgCard posts={post} key={post.id} />;
+  })}
           </div>
           <LoadBtn />
         </div>
@@ -70,13 +67,12 @@ export default function Home({posts}) {
           </div>
           <div className="twoCol">
             <div className="leftCol">
-              <ImgCard />
+              <ImgCard posts={posts[8]} />
             </div>
             <div className="rightCol">
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+            {posts.slice(9,13).map((post) => {
+    return <Card post={post} key={post.id} />;
+  })}
             </div>
           </div>
         </div>
@@ -86,8 +82,9 @@ export default function Home({posts}) {
             <span className="meta">View all</span>
           </div>
           <div className="twoCol">
-            <ImgCard />
-            <ImgCard />
+          {posts.slice(13,15).map((posts) => {
+    return <ImgCard posts={posts} key={posts.id} />;
+  })}
           </div>
           <LoadBtn />
         </div>
@@ -98,14 +95,9 @@ export default function Home({posts}) {
                 <h2>What&apos;s New?</h2>
                 <span className="meta">View all</span>
               </div>
-              <ImgCard />
-              <ImgCard />
-              <ImgCard />
-              <ImgCard />
-              <ImgCard />
-              <ImgCard />
-              <ImgCard />
-              <ImgCard />
+              {posts.slice(15,20).map((posts) => {
+    return <ImgCard posts={posts} key={posts.id} />;
+  })}
             </div>
             <div className="rightCol">
               <Sidebar />

@@ -1,18 +1,22 @@
+import Link from 'next/link'
 import React from 'react'
+import { getDate } from '../../../utils/utils'
 import styles from "../imgCard/imgCard.module.css"
 
-export default function ImgCard({title, image, excerpt, category, pubDate, readTime}) {
+export default function ImgCard({posts}) {
+    const featuredImage = posts._embedded['wp:featuredmedia'][0].source_url
+    // console.log(posts._embedded['wp:featuredmedia'][0].source_url)
     return (
         <div className={styles.ImgCard}>
             <div className='featImg'>
-                <img className="imgHover" src={image} alt="card title" />
+            <Link href={`/posts/${posts.slug}`}><a><img className="imgHover" src={featuredImage} alt={posts.title.rendered} /></a></Link>
             </div>
             <div>
-                    <span className='meta tag'>{category}</span>
-                    <h2 className='largeTitle' dangerouslySetInnerHTML={{ __html:title}}></h2>
+                    {/* <span className='meta tag'>{posts}</span> */}
+                    <Link href={`/posts/${posts.slug}`}><a><h2 className='largeTitle' dangerouslySetInnerHTML={{ __html:posts.title.rendered}}></h2></a></Link>
                     <div className='meta dateMeta'>
                         <time className='pubDate'>
-                            Aug 14 2018
+                            {getDate(posts.modified)}
                         </time>
                         <span className='metaSeperator'>
                         </span>
@@ -22,9 +26,10 @@ export default function ImgCard({title, image, excerpt, category, pubDate, readT
                     </div>
                     <div
                 className="postContent"
-                dangerouslySetInnerHTML={{ __html: excerpt }}
-              ></div>                    <div className='readMore'>
-                        <span>Read More</span>
+                dangerouslySetInnerHTML={{ __html: posts.excerpt.rendered }}
+              ></div>                    
+              <div className='readMore'>
+                        <span><Link href={`/posts/${posts.slug}`}><a>Read More</a></Link></span>
                     </div>
             </div>
         </div>
