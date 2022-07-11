@@ -15,7 +15,7 @@ export async function getPost(slug) {
 }
 
 export async function getCategories() {
-  const categoriesRes = await fetch(BASE_URL + "/categories?_embed&per_page=20");
+  const categoriesRes = await fetch(BASE_URL + "/categories?_embed&per_page=100");
   const categories = await categoriesRes.json();
   console.log(categories)
   return categories;

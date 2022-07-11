@@ -30,6 +30,9 @@ export default function PostPage({post, posts}) {
     (res) => res.name
   );
 
+  const catSlug = post._embedded['wp:term'][0][0].slug
+
+
   // console.log(post);
 
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function PostPage({post, posts}) {
           />
           <div className="featuredOverlay">
             <span className="meta tag">
-              {post._embedded["wp:term"][0][0].name}
+            <Link href={`/category/${catSlug}`}><a><span className='meta tag' dangerouslySetInnerHTML={{__html:post._embedded['wp:term'][0][0].name}}></span></a></Link>
             </span>
             <h1
               className="largeTitle"

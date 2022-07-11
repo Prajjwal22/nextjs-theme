@@ -6,19 +6,20 @@ import Sidebar from "../../components/sidebar/sidebar";
 import { getCategory, getSlugs } from "../../utils/wordpress";
 
 export default function Category({category}) {
-  console.log(category)
+  console.log(category.slug)
   return (
     <>
       <Header />
       <div className="Category">
       <div className="catHead">
             <span className="subTitle">Category</span>
-            <h2 className="catTitle">Marketing</h2>
-            <span className="catBg">Marketing</span>
+            <h2 className="catTitle">{category.name}</h2> 
+            <span className="catBg">{category.name}</span>
           </div>
         <div className="container">
           <div className="mainArea">
             <div className="mainContent">
+              
               {/* <ImgCard />
               <ImgCard />
               <ImgCard />
