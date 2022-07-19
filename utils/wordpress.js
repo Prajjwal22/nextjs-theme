@@ -15,11 +15,12 @@ export async function getPost(slug) {
 }
 
 export async function getCategories() {
-  const categoriesRes = await fetch(BASE_URL + "/categories?_embed&per_page=20");
+  const categoriesRes = await fetch(BASE_URL + "/categories?_embed&per_page=100");
   const categories = await categoriesRes.json();
   console.log(categories)
   return categories;
 }
+
 
 export async function getCategory(slug) {
   const categories = await getCategories();
@@ -34,6 +35,9 @@ export async function getSlugs(type) {
     case "posts":
       elements = await getPosts();
       break;
+      case "categories":
+        elements = await getCategories();
+        break;
   }
   const elementsIds = elements.map((element) => {
     return {

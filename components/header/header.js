@@ -53,9 +53,7 @@ export default function Header() {
             <ul className={click ? "navMenu active" : "navMenu"}>
               <li className={styles.navItem}>
                 <div
-                  exact
-                  to="/"
-                  activeClassName="active"
+                  activeclassname="active"
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >
@@ -66,9 +64,7 @@ export default function Header() {
               </li>
               <li className={styles.navItem}>
                 <div
-                  exact
-                  to="/posts/posts"
-                  activeClassName="active"
+                  activeclassname="active"
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >
@@ -79,9 +75,7 @@ export default function Header() {
               </li>
               <li className={styles.navItem}>
                 <div
-                  exact
-                  to="/posts/category"
-                  activeClassName="active"
+                  activeclassname="active"
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >
@@ -92,9 +86,7 @@ export default function Header() {
               </li>
               <li className={styles.navItem}>
                 <div
-                  exact
-                  to="/contact"
-                  activeClassName="active"
+                  activeclassname="active"
                   className={styles.navLinks}
                   onClick={click ? handleClick : null}
                 >

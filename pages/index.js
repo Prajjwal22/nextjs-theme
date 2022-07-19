@@ -7,14 +7,14 @@ import Header from "../components/header/header";
 import Card from "../components/cards/card/card";
 import Sidebar from "../components/sidebar/sidebar";
 import Post from "../components/posts";
-import { getPosts } from "../utils/wordpress";
+import { getPosts, getCategories } from "../utils/wordpress";
 
-export default function Home({posts}) {
+export default function Home({posts}, {category}) {
   const featuredImage = posts[0]._embedded['wp:featuredmedia'][0].source_url
   const jsxPosts = posts.map((post) => {
     return <Post post={post} key={post.id} />;
   });
-  // console.log(posts[0] )
+  console.log(category)
   return (
     <>
       <Head>
@@ -111,10 +111,13 @@ export default function Home({posts}) {
 }
 export async function getStaticProps({ params }) {
   const posts = await getPosts();
+  const categories = await getCategories();
+
 
   return {
     props: {
-      posts    },
+      posts,
+    categories   },
     revalidate: 10, // In seconds
   };
 }

@@ -3,22 +3,34 @@ import ImgCard from "../../components/cards/imgCard/imgCard";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/sidebar";
-import { getCategory, getSlugs } from "../../utils/wordpress";
+import { getCategories, getCategory, getSlugs } from "../../utils/wordpress";
 
-export default function Category({category}) {
-  console.log(category)
+export default function Category({category}, {PostByCat}) {
+  const CatId = category.id
+  console.log(CatId)
+  getPostByCat()
+  console.log(category.slug)
+
+ async function getPostByCat() {
+  const res = await fetch(`https://techcrunch.com/wp-json/wp/v2/posts?_embedcategories=${CatId}`);
+  const PostByCat = await res.json();
+  console.log(PostByCat)
+  return PostByCat;
+}
   return (
     <>
       <Header />
       <div className="Category">
       <div className="catHead">
             <span className="subTitle">Category</span>
-            <h2 className="catTitle">Marketing</h2>
-            <span className="catBg">Marketing</span>
+            <h2 className="catTitle">{category.name}</h2>
+            <span className="catBg">{category.name}</span>
           </div>
         <div className="container">
           <div className="mainArea">
             <div className="mainContent">
+              {JSON.stringify(PostByCat)}
+              {/* {PostByCat[0].title.rendered} */}
               {/* <ImgCard />
               <ImgCard />
               <ImgCard />
